@@ -12,8 +12,8 @@ type BankBalance struct {
 	BankId  		uint32 		`gorm:"not null" json:"bank_id"`
 	Balance 		int    		`gorm:"size:50;not null" json:"balance"`
 	BalanceAchieve	int    		`gorm:"size:50;not null" json:"balance_achieve"`
-	Code			string  	`gorm:"size:50;not null" json:"code"`
-	Enable			bool   		`gorm:"size:50;not null" json:"enable"`
+	Code			string  	`gorm:"size:50" json:"code"`
+	Enable			bool   		`gorm:"size:50" json:"enable"`
 	Bank 			bank.Bank	`gorm:"foreignkey:BankId"`
 }
 

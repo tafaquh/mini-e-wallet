@@ -50,21 +50,60 @@ var banks = []bank.Bank{
 	},
 }
 
+var banks_balance = []bank_balance.BankBalance{
+	bank_balance.BankBalance{
+		BankId: 1,
+		Balance: 2000000000,
+		BalanceAchieve: 0,
+	},
+	bank_balance.BankBalance{
+		BankId: 2,
+		Balance: 2000000000,
+		BalanceAchieve: 0,
+	},
+	bank_balance.BankBalance{
+		BankId: 3,
+		Balance: 2000000000,
+		BalanceAchieve: 0,
+	},
+}
+
+var users_balance = []user_balance.UserBalance{
+	user_balance.UserBalance{
+		UserId: 1,
+		Balance: 0,
+		BalanceAchieve: 0,
+	},
+	user_balance.UserBalance{
+		UserId: 2,
+		Balance: 0,
+		BalanceAchieve: 0,
+	},
+	user_balance.UserBalance{
+		UserId: 3,
+		Balance: 0,
+		BalanceAchieve: 0,
+	},
+}
+
 var user_banks = []user_bank.UserBank{
 	user_bank.UserBank{
 		UserId: 1,
 		BankId: 1,
 		Status: "active",
+		Type: 1,
 	},
 	user_bank.UserBank{
 		UserId: 2,
 		BankId: 1,
 		Status: "active",
+		Type: 2,
 	},
 	user_bank.UserBank{
 		UserId: 3,
 		BankId: 2,
 		Status: "blocked",
+		Type: 1,
 	},
 }
 
@@ -95,6 +134,16 @@ func Load(db *gorm.DB) {
 		err = db.Debug().Model(&bank.Bank{}).Create(&banks[i]).Error
 		if err != nil {
 			log.Fatalf("cannot seed banks table: %v", err)
+		}
+
+		err = db.Debug().Model(&bank_balance.BankBalance{}).Create(&banks_balance[i]).Error
+		if err != nil {
+			log.Fatalf("cannot seed banks balance table: %v", err)
+		}
+
+		err = db.Debug().Model(&user_balance.UserBalance{}).Create(&users_balance[i]).Error
+		if err != nil {
+			log.Fatalf("cannot seed users balance table: %v", err)
 		}
 
 		err = db.Debug().Model(&user_bank.UserBank{}).Create(&user_banks[i]).Error

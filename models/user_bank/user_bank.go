@@ -5,6 +5,7 @@ import (
 
 	"github.com/tafaquh/mini-e-wallet/models/user"
 	"github.com/tafaquh/mini-e-wallet/models/bank"
+	"github.com/tafaquh/mini-e-wallet/dto"
 )
 
 type UserBank struct {
@@ -15,5 +16,6 @@ type UserBank struct {
 	BankId	uint32    	`gorm:"not null" json:"bank_id"`
 	Bank 	bank.Bank	`gorm:"foreignkey:BankId"`
 	Status	string    	`gorm:"size:20;not null" json:"status"`
+	Type	dto.CardType    `gorm:"not null;" json:"type" sql:"type:ENUM('credit', 'debit')"`
 }
 

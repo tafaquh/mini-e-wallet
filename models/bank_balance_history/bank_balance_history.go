@@ -4,13 +4,7 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/tafaquh/mini-e-wallet/models/bank_balance"
-)
-
-type CardType string
-
-const (
-	Credit CardType = "credit"
-	Debit CardType = "debit"
+	"github.com/tafaquh/mini-e-wallet/dto"
 )
 
 type BankBalanceHistory struct {
@@ -20,11 +14,11 @@ type BankBalanceHistory struct {
 	BalanceBefore	int    						`gorm:"size:50;not null;" json:"balance_before"`
 	BalanceAfter	int    						`gorm:"size:50;not null;" json:"balance_after"`
 	Activity		string    					`gorm:"size:50;not null;" json:"activity"`
-	Type			CardType    				`gorm:"not null;" json:"type" sql:"type:ENUM('credit', 'debit')"`
-	Ip				string    					`gorm:"size:50;not null;" json:"ip"`
-	Location		string    					`gorm:"size:50;not null;" json:"location"`
-	UserAgent		string    					`gorm:"size:50;not null;" json:"user_agent"`
-	Author			string    					`gorm:"size:50;not null;" json:"author"`
+	Type			dto.CardType    			`gorm:"not null;" json:"type" sql:"type:ENUM('credit', 'debit')"`
+	Ip				string    					`gorm:"size:50;" json:"ip"`
+	Location		string    					`gorm:"size:50;" json:"location"`
+	UserAgent		string    					`gorm:"size:50;" json:"user_agent"`
+	Author			string    					`gorm:"size:50;" json:"author"`
 	BankBalance		bank_balance.BankBalance	`gorm:"foreignkey:BankBalanceId"`
 }
 

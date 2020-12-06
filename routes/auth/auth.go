@@ -9,7 +9,7 @@ import (
 func Routes(route *gin.Engine){
 	endpoint := route.Group("/api/v1/auth")
 	{
-		endpoint.GET("/token", auth.Token)
+		endpoint.GET("/logout", auth.Logout)
 		endpoint.POST("/login", auth.Login)
 	}
 }
