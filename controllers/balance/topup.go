@@ -14,13 +14,6 @@ import (
 	"github.com/tafaquh/mini-e-wallet/models/bank_balance_history"
 )
 
-type CardType string
-
-const (
-	Credit CardType = "credit"
-	Debit CardType = "debit"
-)
-
 func TopUp(c *gin.Context) { 
 	user_id := c.Param("id")
 	db := database.DBConn
@@ -40,7 +33,7 @@ func TopUp(c *gin.Context) {
 	err := c.BindJSON(&amount)
 
 	if err != nil {
-		c.JSON(http.StatusUnprocessableEntity, gin.H{"message": "Your balance data type are invalid!"})
+		c.JSON(http.StatusUnprocessableEntity, gin.H{"message": "Your balance data are invalid!"})
 		return 
 	}
 

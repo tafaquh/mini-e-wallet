@@ -15,5 +15,6 @@ func Routes(route *gin.Engine){
 	{
 		endpoint.GET("/balance-history", balance.GetBalanceHistory)
 		endpoint.POST("/topup", balance.TopUp)
+		endpoint.POST("/transfer", balance.Transfer)
 	}
 }
