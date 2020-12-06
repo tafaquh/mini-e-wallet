@@ -6,6 +6,7 @@ import (
 
 	"gorm.io/gorm"
 	"gorm.io/driver/mysql"
+	"github.com/tafaquh/mini-e-wallet/seed"
 )
 
 var (
@@ -19,8 +20,11 @@ var (
 func ConnectMySQL() (err error) {
 	DBConn, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		PrepareStmt: true, //Cache to speed up query process
+		SkipDefaultTransaction: true, //Disable default transaction for auto store created_at, updated_at, deleted_at
 	})
- 
+	
+	seed.Load(DBConn)
+	
     if err != nil {
         return err
     }
