@@ -13,6 +13,10 @@ import (
 	"github.com/tafaquh/mini-e-wallet/models/bank_balance_history"
 )
 
+type Migrator interface {
+	HasTable(dst interface{}) bool
+}
+
 var users = []user.User{
 	user.User{
 		Username: "Tafaquh",
@@ -65,6 +69,10 @@ var user_banks = []user_bank.UserBank{
 }
 
 func Load(db *gorm.DB) {
+	
+	if err := db.Migrator().HasTable(&user.User{}); err { //only check user table, cannot use DropTableIfExists and not effective check all tables one by one
+		return
+	}
 
 	err := db.Debug().AutoMigrate(&user.User{}, &bank.Bank{}, &user_bank.UserBank{}, &user_balance.UserBalance{}, &user_balance_history.UserBalanceHistory{}, &bank_balance.BankBalance{}, &bank_balance_history.BankBalanceHistory{})
 	

@@ -5,6 +5,7 @@ import (
 	  
 	"github.com/tafaquh/mini-e-wallet/database"
 	"github.com/tafaquh/mini-e-wallet/routes/auth"
+	"github.com/tafaquh/mini-e-wallet/routes/common"
 ) 
 
 func main() {
@@ -16,5 +17,6 @@ func main() {
 
 	router := gin.Default()
 	auth.Routes(router) //Added all auth routes
+	common.Routes(router) //Added all auth routes
 	router.Run()
 }
